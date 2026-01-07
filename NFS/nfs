@@ -1,0 +1,33 @@
+STEP 1:
+sudo apt update
+sudo apt install -y nfs-kernel-server
+
+STEP 2:
+sudo mkdir /nfsshare
+cd /nfsshare
+sudo touch aa bb cc
+ls
+
+STEP 3:
+rpm -q nfs-utils
+rpm -q portmap
+
+STEP 4:
+ping <server-ip>
+rpm -ivh ftp://192.168.0.250/pub/RedHat/RPMS/nfs* --force-aid
+
+STEP 5:
+vi/etc/exports
+/var/ftp/pub 192.168.0.0/24(ro,sync)
+/nfsshare 192.168.0.0/24(rw,sync)
+
+STEP 6: 
+service nfs restart
+service nfs restart
+
+STEP 7:
+mount -t nfs <server-ip>:/nfsshare /mnt
+mount -t nfs 10.12.114:/nfsshare /mnt
+
+VERIFY:
+ls /mnt/nfs
